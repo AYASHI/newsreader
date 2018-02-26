@@ -4,7 +4,7 @@
 
 ### CocoaPods
 
-[CocoaPods](http://cocoapods.org) needs to be installed to run this demo. Once installed, run the following command:
+[CocoaPods](http://cocoapods.org) needs to be installed to run this demo. Once installed, run the following command in the project's root folder:
 
 ```ruby
 pod install
