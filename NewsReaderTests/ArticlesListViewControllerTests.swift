@@ -32,6 +32,7 @@ class ArticlesListViewControllerTests: XCTestCase {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         controller = storyboard.instantiateViewController(withIdentifier: "ArticlesListViewController") as? ArticlesListViewController
         controller.loadView()
+        controller.tableView.registerNib(NewsCell.reuseIdentifier)
         controller.articles = self.articles()
     }
     
@@ -42,8 +43,6 @@ class ArticlesListViewControllerTests: XCTestCase {
     func testTableViewLayout() {
         let numberOfRows = controller.tableView(controller.tableView, numberOfRowsInSection: 0)
         XCTAssertEqual(numberOfRows, 2)
-        
-        controller.tableView.registerNib(NewsCell.reuseIdentifier)
         
         let firstArticle = controller.articles[0]
         let firstCell = controller.tableView(controller.tableView, cellForRowAt: IndexPath(row: 0, section: 0)) as! NewsCell
