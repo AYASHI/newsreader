@@ -39,7 +39,7 @@ class NewsReaderApiTests: XCTestCase {
                 log.error(error)
         })
         
-        wait(for: [apiExpectation], timeout: 0.1)
+        wait(for: [apiExpectation], timeout: 0.5)
     }
     
     
