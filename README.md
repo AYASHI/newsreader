@@ -1,4 +1,4 @@
-# newsreader
+# News Reader
 
 ## Requirements
 - iOS 11.0
