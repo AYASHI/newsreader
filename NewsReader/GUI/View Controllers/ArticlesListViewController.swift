@@ -49,9 +49,11 @@ class ArticlesListViewController: UIViewController {
                 self?.refreshControl.endRefreshing()
             }
             }, onError: { [weak self] error in
-                self?.refreshControl.endRefreshing()
-                // Handle error gracefully
-                log.error(error)
+                DispatchQueue.main.async {
+                    self?.refreshControl.endRefreshing()
+                    // Handle error gracefully
+                    log.error(error)
+                }
         })
     }
 
