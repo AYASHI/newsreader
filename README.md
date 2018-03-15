@@ -8,7 +8,6 @@
 
 ```ruby
 pod install
-open NewsReader.xcworkspace
 ```
 
 ### API Key 
