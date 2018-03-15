@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/jeria/Development/iOS/NewsReader-c/NewsReader.xcodeproj">
+      location = "group:NewsReader.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">
