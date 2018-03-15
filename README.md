@@ -12,7 +12,7 @@ pod install
 
 ### API Key 
 
-An API key is necessary to successfully connect to the [API](https://developer.nytimes.com/signup) that the app uses. Once an API key has been aquired, change the `apiKeyValue` property in `NewsApiManager.swift` and run the app.
+An API key is necessary to successfully connect to the [API](https://developer.nytimes.com/signup) that the app uses. Once an API key has been aquired, change the `apiKey` property in `HttpConfiguration.swift` and run the app.
 
 ## Requirements
 - Cocoapods
