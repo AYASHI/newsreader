@@ -1,6 +1,6 @@
 # News Reader
 
-Simple demo app that loads and displays news articles. `Newsreader-mvc" implements the app using MVC and `Newsreader-mvc-c` uses MVC with the Coordinator pattern.
+Simple demo app that loads and displays news articles. `Newsreader-mvc` implements the app using MVC and `Newsreader-mvc-c` uses MVC with the Coordinator pattern.
 
 ## Installation
 
