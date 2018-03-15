@@ -44,7 +44,6 @@ class NewsApiManager {
     private var dataTask: URLSessionDataTask?
     private let apiBaseUrl = "https://api.nytimes.com/svc/mostpopular/v2/mostviewed/all-sections/7.json"
     private let apiKey = "api-key"
-    private let apiKeyValue = "<API-Key>"
     private var urlSession: URLSession {
         let configuration = URLSessionConfiguration.default
         configuration.waitsForConnectivity = true
@@ -52,7 +51,7 @@ class NewsApiManager {
         return URLSession(configuration: configuration)
     }
     private var apiUrl: URL {
-        return URL(string: apiBaseUrl)!.withQueryParams([apiKey: apiKeyValue])
+        return URL(string: apiBaseUrl)!.withQueryParams([apiKey: HttpConfiguration.apiKey])
     }
     
     private var apiRequest: URLRequest {
