@@ -29,12 +29,16 @@ class NewsApiManager {
                 let response = try decoder.decode(Response.self, from: data)
                 let sortedArticlesByDate = response.articles.sorted { $0.published > $1.published }
                 
-                onSuccess(sortedArticlesByDate)
+                DispatchQueue.main.async {
+                    onSuccess(sortedArticlesByDate)
+                }
             } catch let error {
-                onError("Decode error: \(error)")
-                return
+                DispatchQueue.main.async {
+                    onError("Decode error: \(error)")
+                    return
+                }
             }
-            }
+        }
         dataTask?.resume()
     }
     

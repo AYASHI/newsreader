@@ -17,7 +17,7 @@ class ArticleDetailViewController: UIViewController {
     @IBOutlet weak var headlineLabel: UILabel!
     @IBOutlet weak var abstractLabel: UILabel!
     
-    var article: Article?
+    var viewModel: ArticleDetailViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,16 +26,12 @@ class ArticleDetailViewController: UIViewController {
     }
     
     func configureUI() {
-        guard let article = article else {
-            return
-        }
-        
-        headlineLabel.text = article.title
-        abstractLabel.text = article.abstract
-        columnTypeLabel.text = article.column?.uppercased()
-        articleImageView.kf.setImage(with: article.largeImageUrl, options: [.transition(.fade(0.3))])
-        writtenByLabel.text = article.writtenBy
-        dateWrittenLabel.text = DateFormatter.medium.string(from: article.published)
+        headlineLabel.text = viewModel.article.title
+        abstractLabel.text = viewModel.article.abstract
+        columnTypeLabel.text = viewModel.article.column?.uppercased()
+        articleImageView.kf.setImage(with: viewModel.article.largeImageUrl, options: [.transition(.fade(0.3))])
+        writtenByLabel.text = viewModel.article.writtenBy
+        dateWrittenLabel.text = DateFormatter.medium.string(from: viewModel.article.published)
     }
     
 }

@@ -19,26 +19,23 @@ class ArticlesListViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
 
     weak var delegate: ArticlesListViewControllerDelegate?
+    var viewModel: ArticlesListViewModel!
     let refreshControl = UIRefreshControl()
-    var articles: [Article] = [] {
-        didSet {
-            tableView.reloadData()
-        }
-    }
     
     // MARK: - Life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setupRefreshControl()
         setupTableView()
-        setupCommunication()
+        fetchArticles()
     }
-    
+        
     // MARK: - Setup
     
     func setupRefreshControl() {
-        refreshControl.addTarget(self, action: #selector(setupCommunication), for: .valueChanged)
+        refreshControl.addTarget(self, action: #selector(fetchArticles), for: .valueChanged)
     }
     
     func setupTableView() {
@@ -48,19 +45,8 @@ class ArticlesListViewController: UIViewController {
         tableView.refreshControl = refreshControl
     }
     
-    @objc func setupCommunication() {
-        NewsApiManager.instance.mostPopular(onSuccess: { [weak self] articles in
-            DispatchQueue.main.async {
-                self?.articles = articles
-                self?.refreshControl.endRefreshing()
-            }
-            }, onError: { [weak self] error in
-                DispatchQueue.main.async {
-                    self?.refreshControl.endRefreshing()
-                    // Handle error gracefully
-                    log.error(error)
-                }
-        })
+    @objc func fetchArticles() {
+        viewModel.fetchArticles()
     }
     
 }
@@ -70,11 +56,11 @@ class ArticlesListViewController: UIViewController {
 extension ArticlesListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return articles.count
+        return viewModel.articles.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let article = articles[indexPath.row]
+        let article = viewModel.articles[indexPath.row]
         
         let cell = tableView.dequeueReusableCell(withIdentifier: NewsCell.reuseIdentifier, for: indexPath)
         (cell as? NewsCell)?.configure(with: article)
@@ -90,8 +76,23 @@ extension ArticlesListViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let article = articles[indexPath.row]
+        let article = viewModel.articles[indexPath.row]
         delegate?.didSelectArticle(article)
+    }
+    
+}
+
+// MARK: - ArticlesListViewModelDelegate
+
+extension ArticlesListViewController: ArticlesListViewModelDelegate {
+    
+    func articlesDidChange() {
+        tableView.reloadData()
+    }
+    
+    func articlesFailedToLoad(with errorMessage: String) {
+        // Handle error gracefully
+        log.error(errorMessage)
     }
     
 }

@@ -18,10 +18,15 @@ class ArticlesListCoordinator: Coordinator {
     }
     
     func start() {
+        let viewModel = ArticlesListViewModel(with: NewsApiManager.instance)
+        
         let articlesListViewController = ArticlesListViewController.create(of: .articlesList)
+        articlesListViewController.viewModel = viewModel
         articlesListViewController.delegate = self
         articlesListViewController.title = "Most Popular"
         self.articlesListViewController = articlesListViewController
+        
+        viewModel.viewDelegate = articlesListViewController
         
         navigationController.viewControllers = [articlesListViewController]
     }
@@ -31,8 +36,10 @@ class ArticlesListCoordinator: Coordinator {
 extension ArticlesListCoordinator: ArticlesListViewControllerDelegate {
     
     func didSelectArticle(_ article: Article) {
+        let viewModel = ArticleDetailViewModel(with: article)
+        
         let articleDetailViewController = ArticleDetailViewController.create(of: .articleDetail)
-        articleDetailViewController.article = article
+        articleDetailViewController.viewModel = viewModel
         navigationController.pushViewController(articleDetailViewController, animated: true)
     }
     
