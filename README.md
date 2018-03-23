@@ -1,10 +1,12 @@
 # News Reader
 
+Simple demo app that loads and displays news articles. `Newsreader-mvc` implements the app using a MVC architecture and `Newsreader-mvc-c` uses MVC with the Coordinator pattern.
+
 ## Installation
 
 ### CocoaPods
 
-[CocoaPods](http://cocoapods.org) needs to be installed to run this demo app. Once installed, run the followings command in the project's root folder to configure and open the project:
+[CocoaPods](http://cocoapods.org) needs to be installed to run this demo app. Once installed, run the followings command in each project's root folder to configure and open the project:
 
 ```ruby
 pod install
