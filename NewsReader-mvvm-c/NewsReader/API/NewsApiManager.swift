@@ -12,8 +12,6 @@ class NewsApiManager {
     
     // MARK: - Public
     
-    static let instance = NewsApiManager()
-    
     func mostPopular(onSuccess: @escaping ([Article]) -> Void, onError: @escaping (String) -> Void) {
         dataTask?.cancel()
         dataTask = urlSession.dataTask(with: apiRequest) { data, response, error in
@@ -44,7 +42,6 @@ class NewsApiManager {
     
     // MARK: - Private
     
-    private init() {}
     private var dataTask: URLSessionDataTask?
     private let apiBaseUrl = "https://api.nytimes.com/svc/mostpopular/v2/mostviewed/all-sections/7.json"
     private let apiKey = "api-key"

@@ -12,13 +12,15 @@ class ArticlesListCoordinator: Coordinator {
     
     private let navigationController: UINavigationController
     private var articlesListViewController: ArticlesListViewController?
+    private let apiManager: NewsApiManager
     
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
+        self.apiManager = NewsApiManager()
     }
     
     func start() {
-        let viewModel = ArticlesListViewModel(with: NewsApiManager.instance)
+        let viewModel = ArticlesListViewModel(with: apiManager)
         
         let articlesListViewController = ArticlesListViewController.create(of: .articlesList)
         articlesListViewController.viewModel = viewModel
