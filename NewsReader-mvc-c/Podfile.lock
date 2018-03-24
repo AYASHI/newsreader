@@ -1,5 +1,5 @@
 PODS:
-  - Kingfisher (4.6.2)
+  - Kingfisher (4.6.4)
   - OHHTTPStubs (6.1.0):
     - OHHTTPStubs/Default (= 6.1.0)
   - OHHTTPStubs/Core (6.1.0)
@@ -24,7 +24,7 @@ DEPENDENCIES:
   - SwiftyBeaver
 
 SPEC CHECKSUMS:
-  Kingfisher: 55b9c395bf8d3949676ad3861111923990ab68cf
+  Kingfisher: 68498a706e46c2a050b0c9572f100e5db407f6e0
   OHHTTPStubs: 1e21c7d2c084b8153fc53d48400d8919d2d432d0
   SwiftyBeaver: 4f74563624b2c1e821c522c54142b5dd5ebb0f30
 

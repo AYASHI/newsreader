@@ -6,35 +6,30 @@
 //  Copyright © 2018 José Jeria. All rights reserved.
 //
 
-import Foundation
-
-protocol ArticlesListViewModelDelegate: class {
-    
-    func articlesDidChange()
-    func articlesFailedToLoad(with errorMessage: String)
-    
-}
+import RxSwift
 
 class ArticlesListViewModel {
     
-    let apiManager: NewsApiManager
-    var articles: [Article] = [] {
-        didSet {
-            viewDelegate?.articlesDidChange()
-        }
-    }
-    weak var viewDelegate: ArticlesListViewModelDelegate?
+    private let apiManager: NewsApiManager
+    private let disposeBag = DisposeBag()
+    let activityIndicator = ActivityIndicator()
+    let articles = Variable<[Article]>([])
     
     init(with apiManager: NewsApiManager) {
         self.apiManager = apiManager
+        
+        mostPopularArticles()
     }
- 
-    func fetchArticles() {
-        apiManager.mostPopular(onSuccess: { [weak self] articles in
-            self?.articles = articles
-        }) { [weak self] errorMessage in
-            self?.viewDelegate?.articlesFailedToLoad(with: errorMessage)
-        }
+    
+    func mostPopularArticles() {
+        apiManager.mostPopularArticles()
+            .trackActivity(activityIndicator)
+            .subscribe(onNext: { [weak self] articles in
+                self?.articles.value = articles
+                }, onError: { error in
+                    log.error("Handle error gracefully")
+            })
+            .disposed(by: disposeBag)
     }
     
 }

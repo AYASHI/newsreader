@@ -6,7 +6,8 @@
 //  Copyright © 2018 José Jeria. All rights reserved.
 //
 
-import UIKit
+import RxSwift
+import RxCocoa
 
 protocol ArticlesListViewControllerDelegate: class {
     
@@ -17,9 +18,10 @@ protocol ArticlesListViewControllerDelegate: class {
 class ArticlesListViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
-
+    
     weak var delegate: ArticlesListViewControllerDelegate?
     var viewModel: ArticlesListViewModel!
+    let disposeBag = DisposeBag()
     let refreshControl = UIRefreshControl()
     
     // MARK: - Life cycle
@@ -29,13 +31,19 @@ class ArticlesListViewController: UIViewController {
         
         setupRefreshControl()
         setupTableView()
-        fetchArticles()
+        setupTableViewSelection()
     }
-        
+    
     // MARK: - Setup
     
     func setupRefreshControl() {
-        refreshControl.addTarget(self, action: #selector(fetchArticles), for: .valueChanged)
+        refreshControl.rx.controlEvent(.valueChanged).asDriver()
+            .drive(onNext: viewModel.mostPopularArticles)
+            .disposed(by: disposeBag)
+        
+        viewModel.activityIndicator.asDriver()
+            .drive(refreshControl.rx.isRefreshing)
+            .disposed(by: disposeBag)
     }
     
     func setupTableView() {
@@ -43,56 +51,23 @@ class ArticlesListViewController: UIViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 80.0
         tableView.refreshControl = refreshControl
-    }
-    
-    @objc func fetchArticles() {
-        viewModel.fetchArticles()
-    }
-    
-}
-
-// MARK: - UITableViewDataSource
-
-extension ArticlesListViewController: UITableViewDataSource {
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.articles.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let article = viewModel.articles[indexPath.row]
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: NewsCell.reuseIdentifier, for: indexPath)
-        (cell as? NewsCell)?.configure(with: article)
-        
-        return cell
+        viewModel.articles.asObservable()
+            .bind(to: tableView.rx.items(cellIdentifier: NewsCell.reuseIdentifier, cellType: NewsCell.self)) { _, article, cell in
+                cell.configure(with: article)
+            }
+            .disposed(by: disposeBag)
     }
     
-}
-
-// MARK: - UITableViewDelegate
-
-extension ArticlesListViewController: UITableViewDelegate {
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        let article = viewModel.articles[indexPath.row]
-        delegate?.didSelectArticle(article)
-    }
-    
-}
-
-// MARK: - ArticlesListViewModelDelegate
-
-extension ArticlesListViewController: ArticlesListViewModelDelegate {
-    
-    func articlesDidChange() {
-        tableView.reloadData()
-    }
-    
-    func articlesFailedToLoad(with errorMessage: String) {
-        // Handle error gracefully
-        log.error(errorMessage)
+    func setupTableViewSelection() {
+        tableView.rx.modelSelected(Article.self)
+            .subscribe(onNext: { [weak self] article in
+                guard let strongSelf = self, let selectedRowIndexPath = strongSelf.tableView.indexPathForSelectedRow else { return }
+                
+                strongSelf.tableView.deselectRow(at: selectedRowIndexPath, animated: true)
+                strongSelf.delegate?.didSelectArticle(article)
+            })
+            .disposed(by: disposeBag)
     }
     
 }
