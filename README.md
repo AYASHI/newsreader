@@ -1,6 +1,11 @@
 # News Reader
 
-Simple demo app that loads and displays news articles. `Newsreader-mvc` implements the app using a MVC architecture and `Newsreader-mvc-c` uses MVC with the Coordinator pattern.
+Simple demo app that loads and displays news articles. There are 4 versions of the app:
+
+* `Newsreader-mvc`: implements the app using a MVC architecture
+* `Newsreader-mvc-c`: uses MVC with the Coordinator pattern
+* `Newsreader-mvvm-c`: uses Model-View-ViewModel (MVVM) with the Coordinator pattern
+* `Newsreader-mvvm-c-rx`: uses MVVM with the Coordinator pattern and RxSwift
 
 ## Installation
 
