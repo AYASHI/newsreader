@@ -43,7 +43,7 @@ class ArticlesListViewController: UIViewController {
     }
     
     @objc func setupCommunication() {
-        NewsApiManager.instance.mostPopular(onSuccess: { [weak self] articles in
+        NewsApiManager.shared.mostPopular(onSuccess: { [weak self] articles in
             DispatchQueue.main.async {
                 self?.articles = articles
                 self?.refreshControl.endRefreshing()

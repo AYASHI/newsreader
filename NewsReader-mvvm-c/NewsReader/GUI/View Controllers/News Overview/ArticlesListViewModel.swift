@@ -17,7 +17,7 @@ protocol ArticlesListViewModelDelegate: class {
 
 class ArticlesListViewModel {
     
-    let apiManager: NewsApiManager
+    private let apiManager: NewsApiManager
     var articles: [Article] = [] {
         didSet {
             viewDelegate?.articlesDidChange()

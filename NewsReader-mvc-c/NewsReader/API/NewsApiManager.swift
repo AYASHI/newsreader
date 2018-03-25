@@ -12,7 +12,7 @@ class NewsApiManager {
     
     // MARK: - Public
     
-    static let instance = NewsApiManager()
+    static let shared = NewsApiManager()
     
     func mostPopular(onSuccess: @escaping ([Article]) -> Void, onError: @escaping (String) -> Void) {
         dataTask?.cancel()

@@ -61,13 +61,15 @@ class ArticlesListViewController: UIViewController {
     
     func setupTableViewSelection() {
         tableView.rx.modelSelected(Article.self)
-            .subscribe(onNext: { [weak self] article in
-                guard let strongSelf = self, let selectedRowIndexPath = strongSelf.tableView.indexPathForSelectedRow else { return }
-                
-                strongSelf.tableView.deselectRow(at: selectedRowIndexPath, animated: true)
-                strongSelf.delegate?.didSelectArticle(article)
-            })
+            .subscribe(onNext: handleSelectionOfArticle)
             .disposed(by: disposeBag)
+    }
+    
+    func handleSelectionOfArticle(_ article: Article) {
+        guard let selectedRowIndexPath = tableView.indexPathForSelectedRow else { return }
+        
+        tableView.deselectRow(at: selectedRowIndexPath, animated: true)
+        delegate?.didSelectArticle(article)
     }
     
 }
