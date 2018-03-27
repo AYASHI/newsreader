@@ -1,0 +1,33 @@
+PODS:
+  - Kingfisher (4.6.4)
+  - OHHTTPStubs (6.1.0):
+    - OHHTTPStubs/Default (= 6.1.0)
+  - OHHTTPStubs/Core (6.1.0)
+  - OHHTTPStubs/Default (6.1.0):
+    - OHHTTPStubs/Core
+    - OHHTTPStubs/JSON
+    - OHHTTPStubs/NSURLSession
+    - OHHTTPStubs/OHPathHelpers
+  - OHHTTPStubs/JSON (6.1.0):
+    - OHHTTPStubs/Core
+  - OHHTTPStubs/NSURLSession (6.1.0):
+    - OHHTTPStubs/Core
+  - OHHTTPStubs/OHPathHelpers (6.1.0)
+  - OHHTTPStubs/Swift (6.1.0):
+    - OHHTTPStubs/Default
+  - SwiftyBeaver (1.5.1)
+
+DEPENDENCIES:
+  - Kingfisher
+  - OHHTTPStubs
+  - OHHTTPStubs/Swift
+  - SwiftyBeaver
+
+SPEC CHECKSUMS:
+  Kingfisher: 68498a706e46c2a050b0c9572f100e5db407f6e0
+  OHHTTPStubs: 1e21c7d2c084b8153fc53d48400d8919d2d432d0
+  SwiftyBeaver: 4f74563624b2c1e821c522c54142b5dd5ebb0f30
+
+PODFILE CHECKSUM: 0a189261de17ea1794f5f3badb1e3849be6404b1
+
+COCOAPODS: 1.4.0
