@@ -166,8 +166,8 @@
 		C9A362AC20420C49005381DA /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				C9CFD3A8205ACD46002229CE /* News Overview */,
-				C9CFD3A9205ACD51002229CE /* News Details */,
+				C9CFD3A8205ACD46002229CE /* Articles List */,
+				C9CFD3A9205ACD51002229CE /* Article Details */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -181,22 +181,22 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
-		C9CFD3A8205ACD46002229CE /* News Overview */ = {
+		C9CFD3A8205ACD46002229CE /* Articles List */ = {
 			isa = PBXGroup;
 			children = (
 				C9CFD3AA205ACD85002229CE /* ArticlesList.storyboard */,
 				C961B9BB204220F800AE9306 /* ArticlesListViewController.swift */,
 			);
-			path = "News Overview";
+			path = "Articles List";
 			sourceTree = "<group>";
 		};
-		C9CFD3A9205ACD51002229CE /* News Details */ = {
+		C9CFD3A9205ACD51002229CE /* Article Details */ = {
 			isa = PBXGroup;
 			children = (
 				C9CFD3AE205AD1C4002229CE /* ArticleDetail.storyboard */,
 				C9A362CD20421781005381DA /* ArticleDetailViewController.swift */,
 			);
-			path = "News Details";
+			path = "Article Details";
 			sourceTree = "<group>";
 		};
 		C9DAC1E72041749C00069835 /* Models */ = {
