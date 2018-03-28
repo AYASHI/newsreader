@@ -25,7 +25,7 @@ class NewsReaderApiTests: XCTestCase {
     func testFetchArticles() {
         let apiExpectation = expectation(description: "")
         
-        NewsApiManager.instance.mostPopular(onSuccess: { articles in
+        NewsApiClient().mostPopular(onSuccess: { articles in
             
             // Test amount of articles
             XCTAssertEqual(articles.count, 2)

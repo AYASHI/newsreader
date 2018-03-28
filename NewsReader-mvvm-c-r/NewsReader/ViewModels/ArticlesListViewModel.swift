@@ -13,8 +13,8 @@ class ArticlesListViewModel {
     
     let articlesRepository: ArticlesRepository
     var articles: [Article] = []
-    var articlesDidChange = ObserverSet<Void>()
-    var articlesFailed = ObserverSet<String>()
+    let articlesDidChange = ObserverSet<Void>()
+    let articlesFailed = ObserverSet<String>()
     
     init(with articlesRepository: ArticlesRepository) {
         self.articlesRepository = articlesRepository
