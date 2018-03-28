@@ -7,20 +7,26 @@
 //
 
 import Foundation
+import TABObserverSet
 
 class ArticlesListViewModel {
     
     let articlesRepository: ArticlesRepository
-    var articles: [Article] = [] // observable
+    var articles: [Article] = []
+    var articlesDidChange = ObserverSet<Void>()
+    var articlesFailed = ObserverSet<String>()
     
     init(with articlesRepository: ArticlesRepository) {
         self.articlesRepository = articlesRepository
     }
     
     func fetchArticles() {
-//        articleRepository.fetchArticles() { [weak self] articles in
-//            self?.articles = articles
-//        }
+        articlesRepository.fetchArticles(onSuccess: { [weak self] articles in
+            self?.articles = articles
+            self?.articlesDidChange.notify()
+        }) { [weak self] errorMessage in
+            self?.articlesFailed.notify(errorMessage)
+        }
     }
     
 }

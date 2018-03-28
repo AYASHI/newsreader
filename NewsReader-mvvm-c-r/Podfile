@@ -8,6 +8,7 @@ end
 target 'NewsReader' do
     common_pods
     pod 'Kingfisher'
+    pod 'TABObserverSet'
 end
 
 target 'NewsReaderTests' do

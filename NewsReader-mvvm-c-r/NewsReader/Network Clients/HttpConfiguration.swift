@@ -10,6 +10,6 @@ import Foundation
 
 struct HttpConfiguration {
     
-    static let apiKey = "3295950e3bd64c0c842683a33382d40c"
+    static let apiKey = "<add api-key here>"
     
 }

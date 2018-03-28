@@ -42,5 +42,4 @@ class NewsReaderApiTests: XCTestCase {
         wait(for: [apiExpectation], timeout: 0.5)
     }
     
-    
 }

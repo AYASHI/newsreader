@@ -10,11 +10,12 @@ import Foundation
 
 protocol ArticlesRepository {
     
-    func fetchArticles()
+    func fetchArticles(onSuccess: @escaping (_ articles: [Article]) -> Void, onError: @escaping (_ errorMessage: String) -> Void)
     
 }
 
 class DefaultArticlesRepository: ArticlesRepository {
+    
     
     private let newsApiClient: NewsApiClient
     
@@ -22,12 +23,9 @@ class DefaultArticlesRepository: ArticlesRepository {
         self.newsApiClient = newsApiClient
     }
     
-    func fetchArticles() {
-        newsApiClient.mostPopular(onSuccess: { [weak self] articles in
-//            self?.articles = articles
-        }) { [weak self] errorMessage in
-           // self?.viewDelegate?.articlesFailedToLoad(with: errorMessage)
-        }
+
+    func fetchArticles(onSuccess: @escaping ([Article]) -> Void, onError: @escaping (String) -> Void) {
+        newsApiClient.mostPopular(onSuccess: onSuccess, onError: onError)
     }
     
 }

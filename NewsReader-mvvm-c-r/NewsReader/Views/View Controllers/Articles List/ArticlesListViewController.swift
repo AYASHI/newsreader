@@ -29,10 +29,21 @@ class ArticlesListViewController: UIViewController {
         
         setupRefreshControl()
         setupTableView()
+        setupViewModelObservers()
         fetchArticles()
     }
         
     // MARK: - Setup
+    
+    func setupViewModelObservers() {
+        viewModel.articlesDidChange.add { [weak self] _ in
+            self?.tableView.reloadData()
+        }
+        
+        viewModel.articlesFailed.add { errorMessage in
+            // handle error gracefully
+        }
+    }
     
     func setupRefreshControl() {
         refreshControl.addTarget(self, action: #selector(fetchArticles), for: .valueChanged)
@@ -46,7 +57,7 @@ class ArticlesListViewController: UIViewController {
     }
     
     @objc func fetchArticles() {
-     //   viewModel.fetchArticles()
+        viewModel.fetchArticles()
     }
     
 }
@@ -81,20 +92,3 @@ extension ArticlesListViewController: UITableViewDelegate {
     }
     
 }
-
-// MARK: - ArticlesListViewModelDelegate
-// FIXME: remove
-
-//extension ArticlesListViewController: ArticlesListViewModelDelegate {
-//
-//    func articlesDidChange() {
-//        tableView.reloadData()
-//    }
-//
-//    func articlesFailedToLoad(with errorMessage: String) {
-//        // Handle error gracefully
-//        log.error(errorMessage)
-//    }
-//
-//}
-
