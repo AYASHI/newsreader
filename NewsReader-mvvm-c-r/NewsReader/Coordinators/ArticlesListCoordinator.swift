@@ -20,7 +20,7 @@ class ArticlesListCoordinator: Coordinator {
     }
     
     func start() {
-        let articlesRepository = DefaultArticlesRepository(with: newsApiClient)
+        let articlesRepository = ArticlesRepository(with: newsApiClient)
         let viewModel = ArticlesListViewModel(with: articlesRepository)
         
         let articlesListViewController = ArticlesListViewController.create(of: .articlesList)

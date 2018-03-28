@@ -8,13 +8,7 @@
 
 import Foundation
 
-protocol ArticlesRepository {
-    
-    func fetchArticles(onSuccess: @escaping (_ articles: [Article]) -> Void, onError: @escaping (_ errorMessage: String) -> Void)
-    
-}
-
-class DefaultArticlesRepository: ArticlesRepository {
+class ArticlesRepository {
     
     
     private let newsApiClient: NewsApiClient
