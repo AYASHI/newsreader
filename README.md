@@ -5,7 +5,7 @@ Simple demo app that loads and displays news articles. There are 4 versions of t
 * `Newsreader-mvc`: implements the app using a MVC architecture
 * `Newsreader-mvc-c`: uses MVC with the Coordinator pattern
 * `Newsreader-mvvm-c`: uses Model-View-ViewModel (MVVM) with the Coordinator pattern
-* `Newsreader-mvvm-c-r`: uses MVVM with the Coordinator, but separates netwoking logic from view models
+* `Newsreader-mvvm-c-r`: uses MVVM with the Coordinator, but extracts netwoking logic from view models to separate repository classes
 * `Newsreader-mvvm-c-rx`: uses MVVM with the Coordinator pattern and RxSwift
 
 ## Installation
