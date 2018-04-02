@@ -9,9 +9,18 @@
 import Foundation
 import TABObserverSet
 
-class ArticlesListViewModel {
+protocol ArticlesListViewModel {
     
-    let articlesRepository: ArticlesRepository
+    var articles: [Article] { get }
+    var articlesDidChange: ObserverSet<Void> { get }
+    var articlesFailed: ObserverSet<String> { get }
+    func fetchArticles()
+    
+}
+
+class DefaultArticlesListViewModel: ArticlesListViewModel {
+    
+    private let articlesRepository: ArticlesRepository
     var articles: [Article] = []
     let articlesDidChange = ObserverSet<Void>()
     let articlesFailed = ObserverSet<String>()

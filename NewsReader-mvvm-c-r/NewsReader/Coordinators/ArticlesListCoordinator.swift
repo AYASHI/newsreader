@@ -20,8 +20,8 @@ class ArticlesListCoordinator: Coordinator {
     }
     
     func start() {
-        let articlesRepository = ArticlesRepository(with: newsApiClient)
-        let viewModel = ArticlesListViewModel(with: articlesRepository)
+        let articlesRepository = DefaultArticlesRepository(with: newsApiClient)
+        let viewModel = DefaultArticlesListViewModel(with: articlesRepository)
         
         let articlesListViewController = ArticlesListViewController.create(of: .articlesList)
         articlesListViewController.viewModel = viewModel
@@ -37,7 +37,7 @@ class ArticlesListCoordinator: Coordinator {
 extension ArticlesListCoordinator: ArticlesListViewControllerDelegate {
     
     func didSelectArticle(_ article: Article) {
-        let viewModel = ArticleDetailViewModel(with: article)
+        let viewModel = DefaultArticleDetailViewModel(with: article)
         
         let articleDetailViewController = ArticleDetailViewController.create(of: .articleDetail)
         articleDetailViewController.viewModel = viewModel

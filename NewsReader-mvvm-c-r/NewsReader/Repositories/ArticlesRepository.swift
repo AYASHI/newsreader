@@ -8,8 +8,13 @@
 
 import Foundation
 
-class ArticlesRepository {
+protocol ArticlesRepository {
     
+    func fetchArticles(onSuccess: @escaping ([Article]) -> Void, onError: @escaping (String) -> Void)
+    
+}
+
+class DefaultArticlesRepository: ArticlesRepository {
     
     private let newsApiClient: NewsApiClient
     
@@ -17,7 +22,6 @@ class ArticlesRepository {
         self.newsApiClient = newsApiClient
     }
     
-
     func fetchArticles(onSuccess: @escaping ([Article]) -> Void, onError: @escaping (String) -> Void) {
         newsApiClient.mostPopular(onSuccess: onSuccess, onError: onError)
     }

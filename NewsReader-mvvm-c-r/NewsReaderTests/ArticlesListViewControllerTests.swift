@@ -13,30 +13,16 @@ class ArticlesListViewControllerTests: XCTestCase {
     
     var controller: ArticlesListViewController!
     
-    func articles() -> [Article] {
-        let testBundle = Bundle(for: type(of: self))
-        let mostPopularUrl = testBundle.url(forResource: "mostpopular", withExtension: "json")!
-        
-        let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .formatted(DateFormatter.yyyyMMdd)
-        
-        let data = try! Data(contentsOf: mostPopularUrl)
-        let response = try! decoder.decode(Response.self, from: data)
-
-        return response.articles
-    }
-    
     override func setUp() {
         super.setUp()
         
-        let articlesRepository = DefaultArticlesRepository(with: NewsApiClient())
-        let viewModel = ArticlesListViewModel(with: articlesRepository)
+        let viewModel = DefaultArticlesListViewModel(with: MockArticlesRepository())
         
         controller = ArticlesListViewController.create(of: .articlesList)
         controller.viewModel = viewModel
         controller.loadView()
         controller.tableView.registerNib(NewsCell.reuseIdentifier)
-        controller.viewModel.articles = articles()
+        controller.viewModel.fetchArticles()
     }
     
     func testTableViewLayout() {

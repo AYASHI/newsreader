@@ -8,7 +8,13 @@
 
 import Foundation
 
-class ArticleDetailViewModel {
+protocol ArticleDetailViewModel {
+    
+    var article: Article { get }
+    
+}
+
+class DefaultArticleDetailViewModel: ArticleDetailViewModel {
     
     let article: Article
     
